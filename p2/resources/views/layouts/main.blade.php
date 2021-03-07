@@ -4,16 +4,19 @@
 <head>
     <title>@yield('title', 'Retirement Calculator')</title>
     <meta charset='utf-8'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href='/css/home.css' rel='stylesheet'>
+    <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js' defer></script>
+    <script src='/js/script.js' defer></script>
     @yield('head')
 </head>
 
-<body>
-    @yield('content')
-
-    <footer>
-        This website does not store data on the server and does not share data with others.
+<body class=".mx-auto">
+    <div class="container">
+        @yield('content')
+    </div>
+    <footer class="footer bg-light text-muted px-3">
+        Privacy Policy: This website does not store data on the server and does not share data with others.
     </footer>
 
 </body>
