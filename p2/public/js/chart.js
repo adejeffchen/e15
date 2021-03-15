@@ -13,7 +13,7 @@ var chart = new Chart(ctx, {
             borderColor: 'rgb(2, 117, 216)',
             data: expenseForecast
         }, {
-            label: 'Investment portfolio',
+            label: 'Total Liquid Assets',
             //backgroundColor: 'rgb(255,255,255)',
             fill: false,
             borderColor: 'rgb(92, 184, 92)',
@@ -26,6 +26,14 @@ var chart = new Chart(ctx, {
                 scaleLabel: {
                     display: true,
                     labelString: 'Age'
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function (value, index, values) {
+                        return '$' + value;
+                    }
                 }
             }]
         }

@@ -14,16 +14,12 @@ class PageController extends Controller
         return view('pages/home', [
             'ageSelects' => $ageSelects,
             'retiredAgeSelects' => $retiredAgeSelects,
-            'currentAge' => session('currentAge', null),
-            'retiredAge' => session('retiredAge', 65),
             'agesRange' => session('agesRange', null),
-            'rentOrOwn' => session('rentOrOwn', "rent"),
-            'currentExpense' => session('currentExpense', null),
-            'currentInvestment' => session('currentInvestment', null),
-            'mortgage' => session('mortgage', null),
-            'mortgageLastAge' => session('mortgageLastAge', null),
             'expenseForecast' => session('expenseForecast', null),
             'investmentForecast' => session('investmentForecast', null),
+            'retiredExpense' => session('retiredExpense', null),
+            'retiredFund' => session('retiredFund', null),
+            'runOutAge' => session('runOutAge', null),
         ]);
     }
 
@@ -31,8 +27,15 @@ class PageController extends Controller
     // calculate when the person will run out of money
     public function calculate(Request $request)
     {
-        // $ageSelects = range(30, 75);
-        // $retiredAgeSelects = range(45, 85);
+        // validation
+        $request->validate([
+            'currentAge' => 'required|numeric|gte:30',
+            'retiredAge' => 'required|numeric|gte:45',
+            'currentExpense' => 'required|numeric|gt:0',
+            'currentInvestment' => 'required|numeric|gte:0',
+            'mortgage' => 'numeric|gte:0',
+        ]);
+        // when failed, redirect back to '/'
 
         // data from form
         $currentAge = $request->input('currentAge');
@@ -51,27 +54,28 @@ class PageController extends Controller
         $agesRange = range($currentAge, 100);
         $expenseForecast = $this->forecastExpense($currentAge, $currentExpense, $mortgage, $mortgageLastAge);
         $investmentForecast = $this->forecastInvestment($currentAge, $retiredAge, $currentInvestment, $expenseForecast);
+        
+        $retiredExpense = number_format($expenseForecast[$retiredAge-$currentAge]);
+        $retiredFund = number_format($investmentForecast[$retiredAge-$currentAge]);
+        $runOutAge = 0;
 
-        // return view('pages/home', [
-        //     'ageSelects' => $ageSelects,
-        //     'retiredAgeSelects' => $retiredAgeSelects,
-        //     'currentAge' => $currentAge,
-        //     'agesRange' => $agesRange,
-        //     'expenseForecast' => $expenseForecast,
-        //     'investmentForecast' => $investmentForecast,
-        // ]);
+        // calculate age of money running out expense > fund
+        for ($ageIndex = 0; $ageIndex < count($expenseForecast); $ageIndex++) {
+            if ($expenseForecast[$ageIndex] > $investmentForecast[$ageIndex]) {
+                $runOutAge = $ageIndex;
+                break;
+            }
+        }
+        $runOutAge = $runOutAge + $currentAge;
+
         return redirect('/')->with([
-            'currentAge' => $currentAge,
-            'retiredAge' => $retiredAge,
             'agesRange' => $agesRange,
-            'rentOrOwn' => $rentOrOwn,
-            'currentExpense' => $currentExpense,
-            'currentInvestment' => $currentInvestment,
-            'mortgage' => $mortgage,
-            'mortgageLastAge' => $mortgageLastAge,
             'expenseForecast' => $expenseForecast,
             'investmentForecast' => $investmentForecast,
-        ]);
+            'retiredExpense' => $retiredExpense,
+            'retiredFund' => $retiredFund,
+            'runOutAge' => $runOutAge,
+        ])->withInput();
     }
 
     private function forecastExpense($currentAge, $startingExpense, $mortgage, $mortgageLastAge)
