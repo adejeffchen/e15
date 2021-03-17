@@ -66,8 +66,9 @@ class PageController extends Controller
                 break;
             }
         }
-        $runOutAge = $runOutAge + $currentAge;
-
+        // if runOutAge = 0, you never run out of money before age 100
+        $runOutAge = ($runOutAge==0) ? 0 : $runOutAge + $currentAge;
+        
         return redirect('/')->with([
             'agesRange' => $agesRange,
             'expenseForecast' => $expenseForecast,
@@ -83,7 +84,7 @@ class PageController extends Controller
         $expenseForecast = [];
         $expenseForecast[] = $startingExpense;
         $counter = 0;
-        $inflationRate = 0.04;
+        $inflationRate = 0.025;
         while ($counter < (100-$currentAge)) {
             $counter++;
             if ($mortgage != 0) {

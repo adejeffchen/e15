@@ -8,11 +8,11 @@
     It's all about if you have enough money to cover your yearly expense from retirement age to age 100!</p>
 <h2>Philosophy behind the calculation</h2>
 <ul>
-    <li>To forecast your expense at retirement, the assumption is that the yearly expense will increase by 4% per year (to match the inflation rate) </li>
+    <li>To forecast your expense at retirement, the assumption is that the yearly expense will increase by 2.5% per year (to match the inflation rate) </li>
     <li>If renting, your rent will increase with inflation. If owning, your (fixed rate) mortgage payment will stay the same until you pay it off.</li>
     <li>Your total liquid assets include all your cash, savings, and investment portfolio. It will continue to grow until you retire.
         Growth can come from capital gains, salary gains, or passive incomes.
-        For this calculation, we are assuming your total liquid assets has average annual growth of 7%. </li>
+        For this calculation, we are assuming your total liquid assets have an average annual growth of 7%. </li>
     <li>Once you retire, you can withdraw from the investment portfolio to cover the expense and the remaining will continue to grow 3% annually.</li>
 </ul>
 
@@ -119,12 +119,17 @@
     </div>
 
     @isset($expenseForecast)
+    {{-- result section --}}
     <div class="border rounded-sm bg-light mt-3 pt-3">
         <div class="container">
             <h3>Result</h3>
             <p>When you retire at age {{old("retiredAge")}},
                 your yearly forecasted expense will be around {{$retiredExpense}} and your forecasted total liquid assets will be around {{$retiredFund}}.</p>
+            @if($runOutAge==0)
+            <p>Congratulations! You will not run out of money before age 100! </p>
+            @else
             <p>You will run out of money around age {{$runOutAge}}! </p>
+            @endif
         </div>
     </div>
 
