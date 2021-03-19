@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+    // GET '/'
     public function index()
     {
         $ageSelects = range(30, 75);
@@ -23,7 +24,7 @@ class PageController extends Controller
         ]);
     }
 
-    // POST /calculate
+    // POST '/calculate'
     // calculate when the person will run out of money
     public function calculate(Request $request)
     {
@@ -39,7 +40,7 @@ class PageController extends Controller
 
         // data from form
         $currentAge = $request->input('currentAge');
-        $currentExpense = (int)$request->input('currentExpense');
+        $currentExpense = $request->input('currentExpense');
         $retiredAge = $request->input('retiredAge');
         $currentInvestment = $request->input('currentInvestment');
         $rentOrOwn = $request->input('rentOrOwn');
@@ -51,10 +52,12 @@ class PageController extends Controller
             $mortgageLastAge = null;
         }
 
+        // agesRange = x axis for the chart
         $agesRange = range($currentAge, 100);
         $expenseForecast = $this->forecastExpense($currentAge, $currentExpense, $mortgage, $mortgageLastAge);
         $investmentForecast = $this->forecastInvestment($currentAge, $retiredAge, $currentInvestment, $expenseForecast);
         
+        // get expense and funds available at retired age
         $retiredExpense = number_format($expenseForecast[$retiredAge-$currentAge]);
         $retiredFund = number_format($investmentForecast[$retiredAge-$currentAge]);
         $runOutAge = 0;
@@ -62,12 +65,10 @@ class PageController extends Controller
         // calculate age of money running out expense > fund
         for ($ageIndex = 0; $ageIndex < count($expenseForecast); $ageIndex++) {
             if ($expenseForecast[$ageIndex] > $investmentForecast[$ageIndex]) {
-                $runOutAge = $ageIndex;
+                $runOutAge = $ageIndex + $currentAge;
                 break;
             }
         }
-        // if runOutAge = 0, you never run out of money before age 100
-        $runOutAge = ($runOutAge==0) ? 0 : $runOutAge + $currentAge;
         
         return redirect('/')->with([
             'agesRange' => $agesRange,

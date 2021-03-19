@@ -16,6 +16,7 @@
     <li>Once you retire, you can withdraw from the investment portfolio to cover the expense and the remaining will continue to grow 3% annually.</li>
 </ul>
 
+{{-- Form area to gather user input --}}
 <div id='app' v-cloak>
     <div class="border rounded-sm bg-light">
         <form class="p-3" method="POST" action="/calculate">
@@ -86,14 +87,13 @@
                             <div class="form-group">
                                 <label for="mortgageLastAge">Age when mortgage is paid off</label>
                                 <select class="form-control" id="mortgageLastAge" name="mortgageLastAge">
-                                    {{-- Reusing retiredAgeSelects variable range as mortgage last age dropdown  --}}
+                                    {{-- Reusing retiredAgeSelects variable range to populate the dropdown  --}}
                                     @foreach($retiredAgeSelects as $retiredAgeSelect)
                                     @if ($retiredAgeSelect == old("mortgageLastAge", 60) )
                                     <option selected="selected">{{$retiredAgeSelect}}</option>
                                     @else
                                     <option>{{$retiredAgeSelect}}</option>
                                     @endif
-
                                     @endforeach
                                 </select>
                             </div>
@@ -147,6 +147,7 @@
 
 </div>
 
+{{-- Using script here so I can pass data to javascript --}}
 <script type="application/javascript">
     var app = new Vue({
         el: '#app'
