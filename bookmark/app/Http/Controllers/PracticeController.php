@@ -13,7 +13,10 @@ class PracticeController extends Controller
      */
     public function practice1()
     {
-        dump(Book::all()->toArray());
+        //dump(Book::all()->toArray());
+        $book = Book::where('author', '=', 'Dr. Seuss')->get();
+        $book->delete();
+        dump('Book deleted.');
     }
 
     /**
