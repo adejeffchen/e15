@@ -1,0 +1,11 @@
+th,
+td {
+    border: 1px solid black;
+    width: 120px;
+    overflow: hidden;
+}
+
+#month-table {
+    table-layout: fixed;
+    width: 600px;
+}

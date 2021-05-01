@@ -19,8 +19,8 @@ class BooksTableSeeder extends Seeder
     public function run()
     {
         # Three different examples of how to add books
-        $this->addOneBook();
-        //$this->addAllBooksFromBooksDotJsonFile();
+        //$this->addOneBook();
+        $this->addAllBooksFromBooksDotJsonFile();
         //$this->addRandomlyGeneratedBooksUsingFaker();
     }
 

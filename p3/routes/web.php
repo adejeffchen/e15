@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ReleaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// routes that require authentication
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/projects/create', [ProjectController::class, 'create']);
+    Route::post('/projects', [ProjectController::class, 'store']);
+    Route::get('/releases/create', [ReleaseController::class, 'create']);
+    Route::post('/releases', [ReleaseController::class, 'store']);
 });
+
+Route::get('/', [PageController::class, 'index']);
+Route::get('/projects/{id}', [ProjectController::class, 'show']);
+Route::get('/releases/{id}', [ReleaseController::class, 'show']);
+
+
 
 Route::get('/debug', function () {
     $debug = [
