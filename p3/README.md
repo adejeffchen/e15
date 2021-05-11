@@ -1,6 +1,6 @@
 # Project 3
 + By: Jeff Chen
-+ Production URL: <http://e15p3.adejeffchen.me>
++ Production URL: <https://e15p3.adejeffchen.me>
 
 ## Feature summary
 This web app is a release calendar for Portfolio/Program/Project Managers who oversee a list of projects and their releases. Often in a big program, releases have dependencies. This web app helps the PMs to see the dependencies and their status quickly. 
