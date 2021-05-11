@@ -3,6 +3,7 @@
 + Production URL: <http://e15p3.adejeffchen.me>
 
 ## Feature summary
+This web app is a release calendar for Portfolio/Program/Project Managers who oversee a list of projects and their releases. Often in a big program, releases have dependencies. This web app helps the PMs to see the dependencies and their status quickly. 
 + Visitors can register/log in/log out
 + Not log in visitors can only browse the information and cannot make any changes to projects or releases 
 + Users can add/edit projects (project name, project manager, project description)
@@ -21,7 +22,7 @@
   + It displays a calendar view of the upcoming 12 months (if current month is April 2021, the view will cover April 2021 to March 2022)
   + Releases in the upcoming 12 months will be displayed according to the month
   + Assuming only one release per month for a given project 
-  + Release shows the corrsponding status color (green, yellow, red)
+  + Release shows the corresponding status color (green, yellow, red)
   + Release with unknown day will display with a question mark (?) after the month 
   
 ## Database summary
