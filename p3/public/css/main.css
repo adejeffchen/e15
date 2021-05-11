@@ -5,6 +5,39 @@ td {
     overflow: hidden;
 }
 
+.table th {
+    vertical-align: middle;
+}
+
+.empty-col {
+    width: 0px;
+}
+
+.month-row {
+    text-align: center;
+}
+
+.headcol {
+    position: absolute;
+    width: 8em;
+    height: 76px;
+    left: 0;
+    display: flex;
+    align-items: center;
+}
+
+.non-header-row {
+    height: 76px;
+}
+
+.cal-table {
+    width: auto;
+    overflow-x: scroll;
+    margin-left: 8em;
+    overflow-y: visible;
+    padding: 0;
+}
+
 #month-table {
     table-layout: fixed;
     width: 600px;

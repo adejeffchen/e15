@@ -11,7 +11,7 @@ class Project extends Model
 
     public function releases()
     {
-        # Project has many Release
+        # Project has many Releases
         # Define a one-to-many relationship.
         return $this->hasMany('App\Models\Release');
     }

@@ -35,4 +35,28 @@ class HomeTest extends DuskTestCase
                     ->assertVisible('@login-heading');
         });
     }
+
+    public function testEditProjectRequireLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/projects/1/edit')
+                    ->assertVisible('@login-heading');
+        });
+    }
+
+    public function testEditReleaseRequireLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/releases/1/edit')
+                    ->assertVisible('@login-heading');
+        });
+    }
+
+    public function testEditDependenciesRequireLogin()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/dependencies/1/edit')
+                    ->assertVisible('@login-heading');
+        });
+    }
 }

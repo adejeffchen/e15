@@ -6,8 +6,6 @@
     <meta charset='utf-8'>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href='/css/main.css' rel='stylesheet'>
-    {{-- <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script> --}}
     @yield('head')
 </head>
 
@@ -15,7 +13,7 @@
 
     {{-- Navigation bar --}}
     <header>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
             <a class="navbar-brand" href="/">Release Calendar</a>
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -43,10 +41,13 @@
                 </li>
                 @endif
             </ul>
-            <form class="form-inline my-2 my-lg-0 ml-auto">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+            {{-- hide the search bar from header since there is a search field on search page  --}}
+            @if(!Request::is('search'))
+            <form class="form-inline my-2 my-lg-0 ml-auto" action='/search'>
+                <input dusk="search-input" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='search_term' value='{{ old('search_term') }}'>
+                <button dusk="search-button" class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
             </form>
+            @endif
         </nav>
     </header>
 

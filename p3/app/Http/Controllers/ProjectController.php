@@ -23,7 +23,57 @@ class ProjectController extends Controller
     public function show($id)
     {
         $project = Project::where('id', '=', $id)->first();
-        return view('projects/show', ['project' => $project]);
+        $releases = $project->releases->sortBy('release_date');
+        return view('projects/show', [
+            'project' => $project,
+            'releases' => $releases
+            ]);
+    }
+
+    /**
+     * GET /projects/{id}/edit
+     * Show the project detail edit page
+     */
+    public function edit($id)
+    {
+        $project = Project::where('id', '=', $id)->first();
+
+        if (!$project) {
+            return redirect('/')->with([
+                'flash-status-error' => 'Project does not exist'
+            ]);
+        }
+
+        return view('projects/edit', [
+            'project' => $project,
+            ]);
+    }
+
+    /**
+     * PUT /projects/{id}
+     * Save the project detail edit
+     */
+    public function update(Request $request, $id)
+    {
+        $project = Project::where('id', '=', $id)->first();
+
+        // validate
+        $request->validate([
+            'projectName' => 'required|max:255|unique:projects,name,'.$project->id,
+            'projectManager' => 'required|max:255',
+            'projectDescription' => 'max:65535',
+        ]);
+
+        $project->name = $request->projectName;
+        $project->project_manager = $request->projectManager;
+        $project->description = $request->projectDescription;
+        $project->save();
+
+        $releases = $project->releases->sortBy('release_date');
+        return view('projects/show', [
+            'project' => $project,
+            'releases' => $releases
+            ]);
     }
 
     /**

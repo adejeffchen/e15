@@ -11,9 +11,9 @@ Add a Release
     {{-- Select a Project --}}
     <div class="form-group">
         <label for="projectId">Select a Project</label>
-        <select class="form-control" id="projectId" name="projectId">
+        <select dusk="project-select" class="form-control" id="projectId" name="projectId">
             @foreach($projects as $project)
-            @if ($project->id == old("projectId"))
+            @if ($project->id == old("projectId", $project_id))
             <option value={{$project->id}} selected="selected">{{$project->name}}</option>
             @else
             <option value={{$project->id}}>{{$project->name}}</option>
@@ -36,7 +36,13 @@ Add a Release
             <div class="col">
                 <div class="form-group">
                     <label for="year">Year</label>
-                    <input class="form-control" id="year" name="year" placeholder="e.g. 2021" value={{old("year", 2021)}}>
+                    <select class="form-control" id="year" name="year">
+                        @for ($i = 2021; $i < 2026; $i++) @if ($i==old("year", 2021)) <option value={{$i}} selected="selected">{{$i}}</option>
+                            @else
+                            <option value={{$i}}>{{$i}}</option>
+                            @endif
+                            @endfor
+                    </select>
                 </div>
             </div>
             <div class="col">
@@ -70,7 +76,7 @@ Add a Release
         <label for="releaseDescription">Release Description</label>
         <textarea class="form-control" id="releaseDescription" name="releaseDescription" rows="3">{{old("releaseDescription")}}</textarea>
     </div>
-    <button dusk="create-release-button" type="submit" class="btn btn-outline-primary">Add Release</button>
+    <button dusk="create-release-button" type="submit" class="btn btn-primary">Add Release</button>
 </form>
 
 @endsection
