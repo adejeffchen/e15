@@ -1,3 +1,12 @@
+thead th {
+    top: 0;
+    position: sticky;
+    z-index: 20;
+    height: 50px;
+    min-height: 50px;
+    background-color: gray;
+}
+
 th,
 td {
     border: 1px solid black;
@@ -9,21 +18,18 @@ td {
     vertical-align: middle;
 }
 
-.empty-col {
-    width: 0px;
-}
-
 .month-row {
     text-align: center;
 }
 
 .headcol {
-    position: absolute;
-    width: 8em;
+    position: sticky;
+    width: 120px;
     height: 76px;
     left: 0;
     display: flex;
     align-items: center;
+    background-color: #dcdcdc;
 }
 
 .non-header-row {
@@ -32,13 +38,24 @@ td {
 
 .cal-table {
     width: auto;
+    max-height: 98vh;
     overflow-x: scroll;
-    margin-left: 8em;
-    overflow-y: visible;
-    padding: 0;
+    overflow-y: scroll;
+    margin-left: -15px;
+    margin-top: -10px;
+    left: 0;
 }
 
 #month-table {
     table-layout: fixed;
     width: 600px;
+}
+
+.col-project-title {
+    left: 0;
+    position: sticky;
+    z-index: 50;
+    background-color: #dcdcdc;
+    color: #292b2c;
+    text-align: left;
 }

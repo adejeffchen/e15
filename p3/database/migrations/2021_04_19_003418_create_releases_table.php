@@ -22,7 +22,7 @@ class CreateReleasesTable extends Migration
             $table->boolean('day_confirmed');
             $table->text('description')->nullable();
             $table->bigInteger('project_id')->unsigned()->nullable();
-            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 

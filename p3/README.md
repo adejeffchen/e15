@@ -5,7 +5,7 @@
 ## Feature summary
 This web app is a release calendar for Portfolio/Program/Project Managers who oversee a list of projects and their releases. Often in a big program, releases have dependencies. This web app helps the PMs to see the dependencies and their status quickly. 
 + Visitors can register/log in/log out
-+ Not log in visitors can only browse the information and cannot make any changes to projects or releases 
++ Non log in visitors can only browse the information and cannot make any changes to projects or releases 
 + Users can add/edit projects (project name, project manager, project description)
 + Users can add/edit releases for a project (release name, release date, release description, status)
   + Newly created release has status 'On Track' 

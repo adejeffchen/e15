@@ -21,8 +21,8 @@ class CreateDependenciesTable extends Migration
             $table->bigInteger('dependent_release_id')->unsigned();
 
             # Make foreign keys
-            $table->foreign('release_id')->references('id')->on('releases');
-            $table->foreign('dependent_release_id')->references('id')->on('releases');
+            $table->foreign('release_id')->references('id')->on('releases')->onDelete('cascade');
+            $table->foreign('dependent_release_id')->references('id')->on('releases')->onDelete('cascade');
         });
     }
 

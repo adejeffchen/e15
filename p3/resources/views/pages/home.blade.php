@@ -14,10 +14,10 @@
 @endif
 
 <div class="cal-table">
-    <table class="table table-borderless" id="month-table">
+    <table class="table table-borderless release-table table-hover" id="month-table">
         <thead class="bg-secondary text-white">
-            <tr>
-                <th scope="col" class="empty-col"></th>
+            <tr class="header-row">
+                <th scope="col" class="month-row col-project-title">Projects</th>
                 @foreach($months_year_header as $months_year)
                 <th scope="col" class="month-row">{{$months_year}}</th>
                 @endforeach
