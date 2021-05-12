@@ -24,10 +24,12 @@ td {
 
 .headcol {
     position: sticky;
+    position: -webkit-sticky;
     width: 120px;
     height: 76px;
     left: 0;
-    display: flex;
+    z-index: 40;
+    /* display: flex; */
     align-items: center;
     background-color: #dcdcdc;
 }
